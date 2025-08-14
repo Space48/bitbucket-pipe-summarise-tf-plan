@@ -17,10 +17,11 @@ Add the following step to your `bitbucket-pipelines.yml`:
 
 ## Variables
 
-| Variable    | Required | Description                                         |
-| ----------- | -------- | --------------------------------------------------- |
-| INPUT_FILES | Yes      | Glob pattern to match Terraform plan JSON files     |
-| OUTPUT_FILE | Yes      | Path to output markdown file containing the summary |
+| Variable    | Required | Description                                                                                                                            |
+| ----------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| INPUT_FILES | Yes      | Glob pattern to match Terraform plan JSON files                                                                                        |
+| OUTPUT_FILE | Yes      | Path to output markdown file containing the summary                                                                                    |
+| TEMPLATE    | No       | A Markdown template string to inject the plan summaries into. Use a `{{PLAN_SUMMARY}}` keyword where the summaries should be injected. |
 
 ## Examples
 
@@ -37,13 +38,20 @@ Generate a summary of all Terraform plan files in the current directory:
 
 ### Advanced example
 
-Process multiple plan files from different directories and generate a comprehensive summary:
+Process multiple plan files from different directories and generate a comprehensive summary using a template:
 
 ```yaml
 - pipe: space48/bitbucket-pipe-summmarise-tf-plan:latest
   variables:
     INPUT_FILES: "**/*.tfplan.json"
     OUTPUT_FILE: "infra-changes.md"
+    TEMPLATE: |
+      # Build preview
+      This is a summary of infrastructure changes Terraform will make on the affected stacks:
+      ---
+      {{PLAN_SUMMARY}}
+      ---
+      See the [build log](https://example.com/path/to/build) for more details.
 ```
 
 ### Integration with PR comments

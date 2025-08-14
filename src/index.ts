@@ -1,5 +1,5 @@
 import { globSync, writeFileSync } from "node:fs";
-import { getConfig } from "./config";
+import { getConfig, TEMPLATE_KEYWORD } from "./config";
 import { summarise } from "./summarise";
 
 async function main() {
@@ -12,7 +12,7 @@ async function main() {
     return;
   }
 
-  const output = files
+  const summary = files
     .map((filename) => {
       console.log(`Processing ${filename}...`);
 
@@ -25,6 +25,8 @@ async function main() {
     })
     .filter(Boolean)
     .join("\n");
+
+  const output = config.template.replaceAll(TEMPLATE_KEYWORD, summary);
 
   console.log(`Writing summaries to ${config.output}.`);
   writeFileSync(config.output, output);
