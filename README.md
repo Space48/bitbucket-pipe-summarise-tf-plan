@@ -9,7 +9,7 @@ A Bitbucket Pipe to generate markdown summaries of Terraform plan files from you
 Add the following step to your `bitbucket-pipelines.yml`:
 
 ```yaml
-- pipe: space48/bitbucket-pipe-summmarise-tf-plan:latest
+- pipe: space48/bitbucket-pipe-summarise-tf-plan:latest
   variables:
     INPUT_FILES: "*.tfplan.json"
     OUTPUT_FILE: "terraform-summary.md"
@@ -30,7 +30,7 @@ Add the following step to your `bitbucket-pipelines.yml`:
 Generate a summary of all Terraform plan files in the current directory:
 
 ```yaml
-- pipe: space48/bitbucket-pipe-summmarise-tf-plan:latest
+- pipe: space48/bitbucket-pipe-summarise-tf-plan:latest
   variables:
     INPUT_FILES: "*.tfplan.json"
     OUTPUT_FILE: "terraform-summary.md"
@@ -41,7 +41,7 @@ Generate a summary of all Terraform plan files in the current directory:
 Process multiple plan files from different directories and generate a comprehensive summary using a template:
 
 ```yaml
-- pipe: space48/bitbucket-pipe-summmarise-tf-plan:latest
+- pipe: space48/bitbucket-pipe-summarise-tf-plan:latest
   variables:
     INPUT_FILES: "**/*.tfplan.json"
     OUTPUT_FILE: "infra-changes.md"
@@ -59,7 +59,7 @@ Process multiple plan files from different directories and generate a comprehens
 Combine with the PR comment pipe to post Terraform summaries directly to pull requests:
 
 ```yaml
-- pipe: space48/bitbucket-pipe-summmarise-tf-plan:latest
+- pipe: space48/bitbucket-pipe-summarise-tf-plan:latest
   variables:
     INPUT_FILES: "*.tfplan.json"
     OUTPUT_FILE: "terraform-summary.md"
